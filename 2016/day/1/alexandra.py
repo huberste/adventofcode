@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 
+# Python3 script to solve part two of day 1 of the
+# AdventOfCode 2016
+# http://adventofcode.com/
+#
+# author Alexandra Meyer
+
 # load inputdata from file
 inputfile = open('input', 'r')
 inputdata = inputfile.readline()
