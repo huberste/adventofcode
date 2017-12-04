@@ -71,7 +71,6 @@ if input > top_left:
 		distance_to_mid = -distance_to_mid
 	distance = (ring-1) + distance_to_mid
 	print("manhattan-distance to 1: %d" % distance)
-	ecit(0)
 
 # if we subtract (2n-1) - 1 from top_left, we go to top_right:
 top_right = top_left - ((2*ring) - 2)
@@ -104,4 +103,86 @@ print("manhattan-distance to 1: %d" % distance)
 # As a stress test on the system, the programs here clear the grid and then store the value 1 in square 1. Then, in the same allocation order as shown above, they store the sum of the values in all adjacent squares, including diagonals.
 # output: first value written > input
 
+def ringoffield(field):
+	result = 0
+	square = 0
+	while (square < input): 
+		result = result + 1
+		square = bottomright(result)
+	return result
 
+def bottomright(ring):
+	result = (2*ring-1)*(2*ring-1)
+	print("bottomright(%d): %d" % (ring, result))
+	return result
+
+def bottomleft(ring):
+	return bottomright(ring) - (2*(ring-1))
+
+def topleft(ring):
+	return bottomleft(ring) - (2*(ring-1))
+
+def topright(ring):
+	return topleft(ring) - (2*(ring-1))
+
+def isintoprow(field):
+	ring = ringoffield(field)
+	if (field < topleft(ring)) & (field > topright(ring)):	
+		return True
+	return False
+
+def isinrightcol(field):
+	ring = ringoffield(field)
+	if (field < topright(ring)):
+		return True
+	return False
+
+def isinbottomrow(field):
+	ring = ringoffield(field)
+	if (field < bottomright(ring)) & (field > bottomleft(ring)):	
+		return True
+	return False
+
+def isinleftcol(field):
+	ring = ringoffield(field)
+	if (field < bottomleft(ring)) & (field > topleft(ring)):	
+		return True
+	return False
+
+def left(field):
+	ring = ringoffield(field)
+	print("left(%d)" % field)
+	if isintoprow(field) or (field == topright(ring)):
+		print("toprow")
+		return field+1
+	elif isinbottomrow(field) or (field == bottomright(ring)):
+		print("bottomrow")
+		return field-1
+	elif isinleftcol(field) or (field == topleft(ring)) or (field == bottomleft(ring)):
+		print("leftcol")
+		return field + (topleft(ring+1)-topleft(ring)) +1
+	elif isinrightcol(field):
+		print("rightcol")
+		print("topright(ring): %d" % topright(ring))
+		print("topright(ring-1): %d" % topright(ring-1))
+		return field - (topright(ring)-topright(ring-1) -1)
+	return "There was an error in left(field)!"
+
+def right(field):
+	return 0
+
+def top(field):
+	return 0
+
+def bottom(field):
+	return 0
+
+value_written = 1
+
+#list of values
+values = [1]
+ring = 1
+while value_written <= input:
+	value_written = value_written +1
+print("value_written: %d" % value_written)
+print("left(11): %d" % left(11))
