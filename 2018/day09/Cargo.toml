@@ -1,0 +1,6 @@
+[package]
+name = "day09"
+version = "0.1.0"
+authors = ["Stefan Huber <stefan.huber@stusta.de>"]
+
+[dependencies]
