@@ -1,7 +1,7 @@
 use std::env;
 use std::fs;
 
-/* Advent of Code 2018, Day 09: The Stars Align */
+/* Advent of Code 2018, Day 10: The Stars Align */
 fn main() {
     let args: Vec<String> = env::args().collect();
     let inputfile;
